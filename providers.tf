@@ -18,9 +18,3 @@ provider "azurerm" {
   # Configuration options
   features {}
 }
-
-provider "cloudflare" {
-}
-
-provider "azapi" {
-}
