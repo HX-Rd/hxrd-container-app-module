@@ -10,7 +10,7 @@ data "terraform_remote_state" "vpc" {
 }
 
 data "azapi_resource" "my_first_app_container_app_environment" {
-  resource_id = data.terraform_remote_state.vpc.outputs.hxrd_container_app_environment_id
+  resource_id = data.terraform_remote_state.vpc.outputs.container_app_environment_id
   type        = "Microsoft.App/managedEnvironments@2022-11-01-preview"
 
   response_export_values = ["properties.customDomainConfiguration.customDomainVerificationId"]
@@ -56,7 +56,7 @@ resource "cloudflare_record" "CNAME" {
   name = var.subdomain
   type = "CNAME"
   zone_id = data.cloudflare_zone.czone.id
-  value = "${var.subdomain}.${data.terraform_remote_state.vpc.outputs.hxrd_container_app_environment_default_domain}"
+  value = "${var.subdomain}.${data.terraform_remote_state.vpc.outputs.container_app_environment_default_domain}"
 }
 
 resource "cloudflare_record" "TXT" {
