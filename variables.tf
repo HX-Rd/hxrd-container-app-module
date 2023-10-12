@@ -26,7 +26,7 @@ variable "container_name" {
   type        = string
 }
 
-variable "workspace" {
+variable "common_workspace" {
   description = "The terraform cloud workspace"
   type        = string
 }

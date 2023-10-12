@@ -4,7 +4,7 @@ data "terraform_remote_state" "vpc" {
   config = {
     organization = var.organization
     workspaces = {
-      name = var.workspace
+      name = var.common_workspace
     }
   }
 }
