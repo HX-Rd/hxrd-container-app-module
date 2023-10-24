@@ -27,6 +27,11 @@ resource "azurerm_container_app" "container" {
   resource_group_name          = data.terraform_remote_state.vpc.outputs.resource_group_id
   revision_mode                = "Single"
 
+  registry {
+    server = var.registry_server
+    username = var.registry_user
+    password_secret_name = var.registry_secret_name
+  }
 
   template {
     container {

@@ -16,6 +16,24 @@ variable "container_memory" {
   default     = "0.5Gi"
 }
 
+variable "registry_server" {
+  description = "The container registry server"
+  type        = string
+  default     = "ghcr.io"
+}
+
+variable "registry_user" {
+  description = "The container registry username"
+  type        = string
+  default     = "HX-Rd"
+}
+
+variable "registry_secret_name" {
+  description = "The container registry password"
+  type        = string
+  default     = "GITHUB_API_TOKEN"
+}
+
 variable "container_image" {
   description = "The container image"
   type        = string
