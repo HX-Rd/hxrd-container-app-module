@@ -63,5 +63,6 @@ variable "GITHUB_API_TOKEN" {
   description = "The github api token"
   type = string
   sensitive = true
+  default = ""
 }
 
