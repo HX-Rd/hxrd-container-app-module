@@ -35,7 +35,7 @@ resource "azurerm_container_app" "container" {
 
   secret {
     name  = "registry-credentials"
-    value = secrets.GITHUB_API_TOKEN
+    value = var.GITHUB_API_TOKEN
   }
 
   template {
