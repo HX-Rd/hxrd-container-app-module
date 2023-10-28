@@ -58,3 +58,10 @@ variable "subdomain" {
   description = "The root domain"
   type        = string
 }
+
+variable "GITHUB_API_TOKEN" {
+  descriptio  = "The github api token"
+  type = string
+  sensitive = true
+}
+
