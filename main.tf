@@ -20,6 +20,16 @@ data "cloudflare_zone" "czone" {
   name = var.domain
 }
 
+data "azurerm_key_vault_secret" "acr_admin_username" {
+  name         = "hxrdAcrAdminUsername"
+  key_vault_id = data.terraform_remote_state.vpc.outputs.keyvault_id
+}
+
+data "azurerm_key_vault_secret" "acr_admin_password" {
+  name         = "hxrdAcrAdminPassword"
+  key_vault_id = data.terraform_remote_state.vpc.outputs.keyvault_id
+}
+
 
 resource "azurerm_container_app" "container" {
   name                         = var.subdomain
@@ -28,14 +38,14 @@ resource "azurerm_container_app" "container" {
   revision_mode                = "Single"
 
   registry {
-    server = var.registry_server
-    username = var.registry_user
-    password_secret_name = "registry-credentials"
+    server = data.terraform_remote_state.vpc.outputs.acr_login_server
+    username = data.azurerm_key_vault_secret.acr_admin_username.value
+    password_secret_name = "registry-password"
   }
 
   secret {
-    name  = "registry-credentials"
-    value = var.GITHUB_API_TOKEN
+    name  = "registry-password"
+    value = data.azurerm_key_vault_secret.acr_admin_password.value
   }
 
   template {
